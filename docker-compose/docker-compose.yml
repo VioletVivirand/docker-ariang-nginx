@@ -38,4 +38,6 @@ services:
     # volumes:
     #   - '/share/CACHEDEV1_DATA/path_to_list:/var/www'
     image: bixidock/h5ai
+    # Or use https://github.com/Korni22/docker-h5ai ,
+    # A fork of bixidock/h5ai
     restart: always
