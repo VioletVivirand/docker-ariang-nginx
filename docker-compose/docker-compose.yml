@@ -1,0 +1,41 @@
+version: '3'
+services:
+  aria2:
+    container_name: aria2
+    #
+    # Permission
+    # <QANP Container Station>
+    # user: 500:100  # $(id -u):$(id -g)
+    #
+    # Volumes
+    volumes:
+      - './config:/config'
+      - './downloads:/downloads'
+    # <QANP Container Station>
+    # volumes:
+    #   - '/share/CACHEDEV1_DATA/path_to_aria2_config:/config'
+    #   - '/share/CACHEDEV1_DATA/path_to_aria2_downloads:/downloads'
+    ports:
+      - '6800:6800'
+    image: opengg/aria2
+    restart: always
+  ariang:
+    container_name: ariang
+    ports:
+      - '8888:80'
+    image: violetvivirand/ariang-nginx:latest
+    links:
+      - aria2
+    restart: always
+  h5ai:
+    container_name: h5ai
+    ports:
+      - '8889:8080'  # The author made a mistake on this
+    # Volumes
+    volumes:
+      - './:/var/www'
+    # <QANP Container Station>
+    # volumes:
+    #   - '/share/CACHEDEV1_DATA/path_to_list:/var/www'
+    image: bixidock/h5ai
+    restart: always
